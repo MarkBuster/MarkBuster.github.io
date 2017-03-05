@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Welcome-DomboBlog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/05/Welcome-DomboBlog/" class="article-date">
+  <time datetime="2017-03-05T06:29:54.000Z" itemprop="datePublished">2017-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="sunnyxx-直播面试题（观看笔记）"><a href="#sunnyxx-直播面试题（观看笔记）" class="headerlink" title="sunnyxx 直播面试题（观看笔记）"></a>sunnyxx 直播面试题（观看笔记）</h1><h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><h2 id="1）-property-能使用哪些关键字、作用是什么；下面这4种写法的区别？"><a href="#1）-property-能使用哪些关键字、作用是什么；下面这4种写法的区别？" class="headerlink" title="1）@property 能使用哪些关键字、作用是什么；下面这4种写法的区别？"></a>1）@property 能使用哪些关键字、作用是什么；下面这4种写法的区别？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, strong) NSArray *array0;//mutableArray copy 成array0时，如果array0种的值被改了，会出什么问题呢</div><div class="line">@property (nonatomic, copy) NSArray *array1;//常规写法</div><div class="line">@property (nonatomic, strong) NSMutableArray *array2;//标准写法</div><div class="line">@property (nonatomic, copy) NSMutableArray *array3;// 把Array mutablecopy 成 array3后，array3其实还是 Array对象，如果向其中插入对象的话，则会造成crash</div></pre></td></tr></table></figure>
+<p>copy的深浅拷贝只说是不正确的。<br> copy 是相对于mutablecopy来说，Array mutablecopy可以变成MutableArry，  MutableArry可以copy成Array。同理还有NSdiction。<br> 一个Array mutablecopy 成一个 MutableArray后，Array里面的东西还是原来的东西，里面的元素并没有重新new一个新的东西申请新的内存，这个是浅拷贝，并不是之前说的深拷贝。</p>
+<h2 id="2-下边对象分别都在什么时候释放"><a href="#2-下边对象分别都在什么时候释放" class="headerlink" title="2) 下边对象分别都在什么时候释放"></a>2) 下边对象分别都在什么时候释放</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (void)ARCProblem&#123;</div><div class="line">    id obj0 = @&quot;sunnyxx&quot;; //会一直在</div><div class="line">    __weak id obj1 = obj0; //__weak obj1的地址指向obj0的对象，所以只要obj0不释放obj1就不会被释放</div><div class="line">    __strong id obj2 = [NSObject new];//obj2 会在用完的时候，obj2被释放</div><div class="line">    __weak id obj3 = [NSObject new]; //obj3 在赋值之后就会被释放，因为没有人强引用obj3，所以在这行结束 obj3就会被释放</div><div class="line">    &#123;</div><div class="line">        id obj4 = [NSObject new];// 在&#123;&#125;区域结束的时候会被释放</div><div class="line">    &#125;</div><div class="line">    __autoreleasing id obj5 = [NSObject new];// obj5是个自动释放的对象，obj5会被加到自动释放池中，会在一个最近的自动释放池中被释放，如果是ARC外面有个autoreleasPool 则会在那个时候被释放，如果是在viewdidload中，则会在runloop的autoreleasPool中释放。</div><div class="line">    __unsafe_unretained id obj6 = self;//相当于retain，obj6不会对self进行影响，理论上obj6在任何时候都会被释放。 unsafe不保证对象时刻都有，可能随时销毁。</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3）-会发生什么"><a href="#3）-会发生什么" class="headerlink" title="3） 会发生什么"></a>3） 会发生什么</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    self.view = nil;</div><div class="line">    //view Did Load 是在view被load的时候被调用，self.view 是个懒加载的属性，第一次在.view的时候，会load一下view相关方法，在加载完成后悔通知VC执行viewDidLoad方法</div><div class="line">    // 所以在self.view = nil 的时候</div><div class="line"> // 很有可能出现递归，但是如果没有再次调用 self.view 也可能不会出现递归，出现黑屏现象</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-block-循环引用的三种解决方案"><a href="#4-block-循环引用的三种解决方案" class="headerlink" title="4) block 循环引用的三种解决方案"></a>4) block 循环引用的三种解决方案</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">//如何解决下面代码的问题</div><div class="line">- (void)blockRetainCycleProblem&#123;</div><div class="line">    self.block = ^&#123;</div><div class="line">        NSLog(@&quot;%@&quot;,@[self]);</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// ===== 三种解决办法</div><div class="line">- (void)blockRetainCycleProbleAnswer0&#123;</div><div class="line">    __weak typeof(self) weakSelf;</div><div class="line">    self.block = ^&#123;</div><div class="line">        NSLog(@&quot;%@&quot;,@[weakSelf]);</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)blockRetainCycleProbleAnswer1&#123;</div><div class="line">    __weak typeof(self) weakSelf;</div><div class="line">    self.block = ^&#123;</div><div class="line">        __weak typeof(weakSelf) strongSelf = weakSelf;</div><div class="line">        NSLog(@&quot;%@&quot;, @[strongSelf]);</div><div class="line">        // 确保在 block块内 self不会被释放, 如果放倒数组里带出block区域，则可能造成crash，self可能被释放掉</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)blockRetainCycleProbleAnswer2&#123;</div><div class="line">    __weak typeof(self) weakSelf;</div><div class="line">    self.block = ^&#123;</div><div class="line">        __weak typeof(weakSelf) strongSelf = weakSelf;</div><div class="line">        if (strongSelf) &#123;</div><div class="line">            NSLog(@&quot;%@&quot;,@[strongSelf]);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5）Block内存管理Extension"><a href="#5）Block内存管理Extension" class="headerlink" title="5）Block内存管理Extension"></a>5）Block内存管理Extension</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">///下面的 self 用不用weak</div><div class="line">- (void)blockRetainCycleProblemExt&#123;</div><div class="line">    // 下面的 self 用不用weak</div><div class="line">    [UIView animateWithDuration:1 animations:^&#123;</div><div class="line">        self.view.frame = CGRectMake(1, 2, 3, 4);</div><div class="line">        // 这行block 是瞬间执行的，在这行代码走完，会立即调用这个block方法</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //那这个呢</div><div class="line">    [UIView animateWithDuration:1 delay:1000 options:0 animations:^&#123;</div><div class="line">        self.view.frame = CGRectMake(4, 1, 2, 3);</div><div class="line">        // 这个也是瞬间执行</div><div class="line">    &#125; completion:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6-代码规范"><a href="#6-代码规范" class="headerlink" title="6)代码规范"></a>6)代码规范</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">#pragma mark - 代码规范 （问题）</div><div class="line">typedef enum &#123;</div><div class="line">    UserSex_Man,</div><div class="line">    UserSex_Womain</div><div class="line">&#125;UserSex;</div><div class="line"></div><div class="line">@interface UserModel : NSObject</div><div class="line"></div><div class="line"></div><div class="line">@property(nonatomic, strong) NSString *name;</div><div class="line">@property(assign, nonatomic) int age;</div><div class="line">@property (nonatomic, assign) UserSex sex;</div><div class="line"></div><div class="line">-(id)initUserModelWithUserName: (NSString*)name withAge:(int)age;</div><div class="line"></div><div class="line">-(void)doLogIn;</div><div class="line">@end</div><div class="line"></div><div class="line"></div><div class="line">#pragma mark - 正确的代码规范</div><div class="line">typedef NS_ENUM(NSUInteger, XXUserGender) &#123;</div><div class="line">    XXUserGenderUndefined,</div><div class="line">    XXUserGenderMale,</div><div class="line">    XXUserGenderFemale</div><div class="line">&#125;;</div><div class="line"></div><div class="line">@interface XXUserModel : NSObject</div><div class="line"></div><div class="line"></div><div class="line">@property (nonatomic, strong) NSString *name;</div><div class="line">@property (nonatomic, assign) int age;</div><div class="line">@property (nonatomic, assign) XXUserGender gender;</div><div class="line"></div><div class="line">-(instancetype)initWithUsername:(NSString *)name age:(NSInteger)age;</div><div class="line"></div><div class="line">-(void)login;</div><div class="line">@end</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/05/Welcome-DomboBlog/" data-id="cizwbmc240001cf6d8i38nz6v" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Hello-word" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/05/Hello-word/" class="article-date">
+  <time datetime="2017-03-05T06:20:12.000Z" itemprop="datePublished">2017-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/05/Hello-word/">Hello word</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/05/Hello-word/" data-id="cizwbmc1z0000cf6dpnr97wtf" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/05/hello-world/" class="article-date">
+  <time datetime="2017-03-05T06:11:31.000Z" itemprop="datePublished">2017-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/05/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/05/hello-world/" data-id="cizwbmc280002cf6dj721umh1" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/05/Welcome-DomboBlog/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/05/Hello-word/">Hello word</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/05/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
