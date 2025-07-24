@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+:root {
+  --primary-color: #0a74da;
+  --dark-color: #666;
+  --light-color: #f9f9f9;
+  --light-color2: #efefef;
+  --background-color: #ffffff;
+  --body-font: 'Helvetica', 'Arial', sans-serif;
+  --heading-font: 'Orbitron', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  line-height: 1.6;
+  color: var(--dark-color);
+  background-color: var(--background-color);
+}
+
+header {
+  /* Fixes the header to the top of the page. */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Adds a modern blur effect */
+  padding: 1rem 2rem;
+  text-align: center;
+  z-index: 1000; /* Ensures it stays on top of other content */
+  border-bottom: 1px solid #eee;
+}
+
+.indented-paragraph{
+text-indent: 40px;
+}
+
+nav a {
+  color: var(--dark-color);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 1.5rem; /* Space out the navigation links */
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--primary-color);
+}
+
+section {
+  padding: 6rem 2rem;
+  max-width: 1000px;
+  margin: auto; /* Centers the sections */
+}
+
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Horizontal */
+  align-items: center; /* Vertical */
+  text-align: center;
+}
+
+#hero img{
+width: 200px;
+height: 200px;
+border-radius: 50%;
+object-fit: cover;
+border: 4px solid var(--primary-color);
+}
+
+.MyName {
+  font-size: 4rem;
+  font-family: var(--heading-font);
+  font-weight: bold;
+}
+
+#about {
+ background-color: var(--light-color);
+ padding-top: 6rem;
+}
+
+/* PROJECTS SECTION */
+#projects {
+  background-color: var(--light-color2);
+  padding-top: 6rem;
+}
+
+footer#contact {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: var(--dark-color);
+  color: var(--light-color);
+}
+
+#contact ul {
+  list-style-type: none; /* no bullet points */
+  padding: 0;
+  display: flex; 
+  justify-content: center; 
+  gap: 2rem; 
+}
+
+
+#contact img {
+  width: 70px; 
+  height: 70px; 
+  transition: transform 0.3s ease; 
+}
+
+/* gmail icon adjustment */
+#contact img#gmail {
+  width: 45px;  
+  height: 18px; 
+  transition: transform 0.3s ease; 
+  margin-top: 22px;
+}
+
+/* zoom effect when hovering*/
+#contact img:hover {
+  transform: scale(1.1);
+}
+
+/* Project Cards */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: var(--background-color);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card h3 {
+    margin-top: 0;
+}
+
+.project-tags {
+    margin: 1rem 0;
+}
+
+.tag {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+}
+
+.project-links .button {
+    text-decoration: none;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-right: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.project-links .button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
